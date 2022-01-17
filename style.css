@@ -66,3 +66,43 @@ html {
 .result .lose {
   color: red;
 }
+
+/* Áre de Botões */
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn {
+  padding: 5px 10px;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  border: 1px solid gray;
+}
+
+.btn.new-game {
+  background-color: blue;
+  color: white;
+}
+
+.btn.attack {
+  background-color: red;
+  color: white;
+}
+
+.btn.especial-attack {
+  background-color: orange;
+  color: black;
+}
+
+.btn.heal {
+  background-color: green;
+  color: white;
+}
+
+.btn.give-up {
+  background-color: #bbb;
+  color: black;
+}
