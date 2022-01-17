@@ -33,7 +33,10 @@
         <div class="life">{{ monsterLife }}%</div>
       </div>
     </div>
-    <div class="panel result"></div>
+    <div v-if="hasResult" class="panel result">
+      <div v-if="playerWins" class="win">Você Ganhou!! :)</div>
+      <div v-else class="lose">Você Perdeu!! :(</div>
+    </div>
     <div class="panel buttons"></div>
     <div class="panel logs"></div>
   </div>
