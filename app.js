@@ -22,6 +22,7 @@ new Vue({
       this.running = true
       this.playerLife = 100
       this.monsterLife = 100
+      this.logs = []
     },
     attack(especial) {
       this.hurt('playerLife', 7, 11, false)
@@ -34,10 +35,10 @@ new Vue({
       // If result is negative the result is equal 0
       this[attr] = Math.max(this[attr] - hurt, 0)
 
-      this.registerLog(attr, hurt)
+      this.registerHurtLog(attr, hurt)
     },
     healAndHurt() {
-      if(this.playerLife == 100) return
+      if (this.playerLife == 100) return
       this.heal(10, 15)
       this.hurt('playerLife', 7, 11, false)
     },
@@ -46,26 +47,34 @@ new Vue({
 
       // If result is greater than 100 the result is equal 100
       this.playerLife = Math.min(this.playerLife + heal, 100)
+      this.registerLog(`Jogador ganhou força de ${heal}`, 'player')
     },
     getRandom(min, max) {
       const value = Math.random() * (max - min) + min
 
       return Math.round(value)
     },
-    registerLog(attrSource, hurt) {
-      let source  = 'Player'
-      let target  = 'Monstro'
-      let text    = ''
-      let klass   = 'player'
+    registerHurtLog(attrSource, hurt) {
+      let source = 'Player'
+      let target = 'Monstro'
+      let text = ''
+      let klass = 'player'
       if (attrSource == 'monsterLife') {
-        source  = 'Monstro'
-        target  = 'Player'
-        klass   = 'monster'
+        source = 'Monstro'
+        target = 'Player'
+        klass = 'monster'
       }
 
       text = `${source} atingiu ${target} com ${hurt}`
 
+      this.registerLog(text, klass)
+    },
+    registerLog(text, klass) {
       this.logs.unshift({ text, klass })
+    },
+    giveUp() {
+      this.running = false
+      this.logs = []
     }
   },
 
