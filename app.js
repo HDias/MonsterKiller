@@ -30,8 +30,19 @@ new Vue({
       const plus = especial ? 5 : 0
       const hurt = this.getRandom(min + plus, max + plus)
 
-      // If result is negative the reulst is equal 0
+      // If result is negative the result is equal 0
       this[attr] = Math.max(this[attr] - hurt, 0)
+    },
+    healAndHurt() {
+      if(this.playerLife == 100) return
+      this.heal(10, 15)
+      this.hurt('playerLife', 7, 11, false)
+    },
+    heal(min, max) {
+      const heal = this.getRandom(min, max)
+
+      // If result is greater than 100 the result is equal 100
+      this.playerLife = Math.min(this.playerLife + heal, 100)
     },
     getRandom(min, max) {
       const value = Math.random() * (max - min) + min
